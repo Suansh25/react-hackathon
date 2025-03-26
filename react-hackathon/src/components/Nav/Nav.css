@@ -1,0 +1,53 @@
+header {
+    background-color: transparent;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    font-size: 25px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    z-index:10;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.book-now {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.Nav-image{
+    width:60rem;
+    position:absolute;
+    right:-3%;
+    padding-right: 0;
+    z-index: -5;
+}

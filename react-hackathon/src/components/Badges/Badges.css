@@ -1,0 +1,23 @@
+.badge-container{
+    padding-top: 5vh;
+}
+
+.badge-card {
+    width: 200px;
+    border-radius: 20px;
+  
+  }
+  
+  .badge-image {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    
+    
+  }
+  
+  .badge-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+  }

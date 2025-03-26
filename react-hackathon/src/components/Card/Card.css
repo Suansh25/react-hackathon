@@ -1,0 +1,91 @@
+
+  .product-card {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 400px;
+    box-shadow: 40px 40px 40px rgba(0, 0, 0, 0.1);
+   
+     background-color: white; 
+      border-radius: 25px;
+      padding: 0px;
+  
+  }
+  
+  .product-image {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .product-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .discount-tag {
+    position: absolute;
+    background: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    color: #ff7d7d;
+    right: 10px;
+    top: 10px;
+    text-transform: capitalize;
+  }
+  
+  .card-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    width: 90%;
+    text-transform: capitalize;
+    border: none;
+    outline: none;
+    /* background: #fff; */
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+    opacity: 0;
+  }
+  
+  .product-card:hover .card-btn {
+    opacity: 1;
+  }
+  
+  .card-btn:hover {
+    background: #ff7d7d;
+    /* color: #fff; */
+  }
+  
+  .product-info {
+    width: 100%;
+    padding-top: 10px;
+    padding: 8px;
+    font-size: 15px;
+      color: black;
+      
+      
+  }
+  
+  .product-brand {
+    text-transform: uppercase;
+  }
+  
+  .product-short-description {
+    width: 100%;
+    /* height: 50px; */
+    line-height: 20px;
+    overflow: hidden;
+    opacity: 0.5;
+    text-transform: capitalize;
+    margin: 5px 0;
+  }
+  
+  
+  
+  
