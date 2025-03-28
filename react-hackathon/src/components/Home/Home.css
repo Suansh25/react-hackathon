@@ -1,74 +1,135 @@
-/* Prevent horizontal scrolling */
-html, body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    width: 100%;
+:root {
+  --primary-color: #131416; /* Primary button and highlight color */
+  --secondary-color: #3a5bef; /* Secondary button color */
+  --dark-color: #222; /* Dark text color */
+  --gray-color: #666; /* Light gray text */
+  --light-gray: rgba(0, 0, 0, 0.1); /* Hover background */
+  --background-color: #FAF8ED; /* Default background */
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Default shadow */
+  --light-color:white;
 }
 
-/* Hero section */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+  background-color: var(--background-color);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+}
+
 .hero {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 100vw;
-    padding: 50px;
-    padding-left: 10vw;
-    box-sizing: border-box;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+              url('react-hackathon/public/HomeImages/Hyd.jpg') no-repeat center center;
+  background-size: cover;
+  width: 100vw;
+  max-width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  border-radius: 8px;
+
+ 
 }
 
-/* Hero text */
-.hero-text {
-    max-width: 50%;
+.hero h1 {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
-.hero-text h1 {
-    font-size: 48px;
-    color: #333;
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 700px;
 }
 
-.hero-text p {
-    font-size: 18px;
-    color: #666;
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
-/* Search box */
-.search-box {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+.feature-card {
+  background-color: var(--light-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-.search-box input {
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+.feature-card:hover {
+  transform: translateY(-5px);
 }
 
-.search-box button {
-    background-color: #ff6b6b;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
+.feature-card i {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
 }
 
-/* Hero image */
-.hero-image {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 10vw;
-    max-width: 40vw;
-    overflow: hidden;
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--dark-color);
 }
 
-.hero-image img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
+.feature-card p {
+  color: var(--gray-color);
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn i {
+  margin-right: 0.5rem;
+}
+
+.btn.primary {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
+}
+
+.btn.secondary {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.btn.secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
 }

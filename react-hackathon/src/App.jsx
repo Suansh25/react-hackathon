@@ -1,12 +1,12 @@
 import  Nav from './components/Nav/Nav.jsx'
 import Home from './components/Home/Home.jsx'
 import './App.css'
-import HomeImg from './components/Home/HomeImg.jsx'
 import SecondPagetitle from './components/SecondPage/SecondPagetitle.jsx'
 import Card from './components/Card/Card.jsx'
 import Badges from './components/Badges/Badges.jsx'
 import Badgedetails from './components/SecondPage/Badgesdetails.jsx'
 import User from './components/User/User.jsx'
+import Footer from './components/Footer/Footer.jsx'
 
 function App() {
   let arr = [
@@ -59,9 +59,8 @@ function App() {
   return (
     <>
     <Nav></Nav>
-    <div style={{display:"flex",justifyContent:"space-between"}}>
+    <div style={{padding : "3rem"}}>
     <Home></Home>
-    <HomeImg></HomeImg>
     </div><br /><br /><br /><br /><br />
     <hr />
      <Badgedetails/>
@@ -85,7 +84,7 @@ function App() {
       }
       </div>
       <hr />
-   
+   <Footer></Footer>
     </>
   )
 }

@@ -1,0 +1,72 @@
+/* Define global variables */
+:root {
+  --primary-color: #131416; /* Primary button and highlight color */
+  --secondary-color: #3a5bef; /* Secondary button color */
+  --dark-color: #222; /* Dark text color */
+  --gray-color: #666; /* Light gray text */
+  --light-gray: rgba(0, 0, 0, 0.1); /* Hover background */
+  --background-color: #FAF8ED; /* Default background */
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Default shadow */
+}
+
+/* Footer */
+.footer {
+  background-color: var(--background-color);
+  color: var(--light-text);
+  padding: 3rem 2rem 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: var(--accent-color);
+}
+
+.footer-section p {
+  margin-bottom: 1rem;
+  color: var(--gray-color);
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section a {
+  color: var(--gray-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--accent-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  color: var(--footer-text);
+}

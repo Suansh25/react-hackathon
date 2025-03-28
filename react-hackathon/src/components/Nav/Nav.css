@@ -1,53 +1,114 @@
-header {
-    background-color: transparent;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+:root {
+    --primary-color: #131416; /* Primary button and highlight color */
+  --secondary-color: #3a5bef; /* Secondary button color */
+  --dark-color: #222; /* Dark text color */
+  --gray-color: #666; /* Light gray text */
+  --light-gray: rgba(0, 0, 0, 0.1); /* Hover background */
+  --background-color: #FAF8ED; /* Default background */
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --light-color:white;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-nav {
-    font-size: 25px;
-    background-color: transparent;
-    display: flex;
-    align-items: center;
+body {
     width: 100%;
+    overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+    background-color: var(--background-color);
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--background-color);
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-nav ul {
-    list-style: none;
     display: flex;
-    gap: 20px;
-    z-index:10;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
-nav ul li a {
+.logo i {
+    margin-right: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav li {
+    margin: 0 0.5rem;
+}
+
+.nav a {
     text-decoration: none;
-    color: #333;
-    font-weight: bold;
+    color: var(--dark-gray);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
-.book-now {
-    background-color: #ff6b6b;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    
+.nav a i {
+    margin-right: 0.5rem;
+}
+
+.nav a:hover {
+    color: var(--primary-color);
+    background-color: var(--light-gray);
+}
+
+.nav a.active {
+    color: var(--primary-color);
+    background-color: var(--light-gray);
+    font-weight: 600;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    object-fit: cover;
+}
+
+#user-points {
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: var(--light-gray);
+    padding: 0.3rem 0.8rem;
     border-radius: 20px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.Nav-image{
-    width:60rem;
-    position:absolute;
-    right:-3%;
-    padding-right: 0;
-    z-index: -5;
+    font-size: 0.9rem;
 }
