@@ -1,3 +1,7 @@
 .Secondpagetitle h3{
     color: gray;    
 }
+.Secondpagetitle{
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}

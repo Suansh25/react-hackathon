@@ -3,12 +3,15 @@ function User(){
     return(
         <section class="user">
     <div class="user-text">
-        <h2>Your Experience</h2>
-        <h1>Your Stories</h1>
-        <h1> Your Adventures</h1>
-        <p>Here stats of the user or any random statements.</p>
-        <h1>here we will add stats in form of box</h1>
-        
+        <div className='loginForm'>
+      
+        <form action="">
+        <h2>Your Experience</h2><br />
+            <input type="text" id='name' placeholder='Enter Your Name' /><br />
+            <input type="email" id= "email"placeholder='Enter your Email' /><br />
+            <input type="date"  id='dob'/>
+        </form>
+        </div> 
     </div>
     <div class="user-image">
         <img src="./UserImages/User.png" alt="Traveler"/>

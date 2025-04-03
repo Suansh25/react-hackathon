@@ -11,7 +11,7 @@
 
 /* Footer */
 .footer {
-  background-color: var(--background-color);
+  background-color: var(--light-gray);
   color: var(--light-text);
   padding: 3rem 2rem 1rem;
 }

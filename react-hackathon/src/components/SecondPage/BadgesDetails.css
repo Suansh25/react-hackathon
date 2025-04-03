@@ -1,9 +1,20 @@
-.b-heading{
-    padding-left: 10vw;
-    padding-top: 5rem;
-    padding-bottom: 2rem;
+.b-heading {
+  
+    padding-top: 3rem !important;
+    padding-bottom: 2rem !important;
 }
-.b-para{
-    padding-bottom: 5rem;
-    padding-left: 10vw;
+.b-para {
+    padding-bottom: 3rem !important;
+   
 }
+.section-title {
+    font-size: 30px !important;
+   
+    padding-top: 6vh;
+    padding-bottom: 6vh;
+
+}
+.btn.primary {
+    background-color: var(--primary-color);
+    color: white;
+  }

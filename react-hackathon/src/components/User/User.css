@@ -1,4 +1,13 @@
-
+:root {
+    --primary-color: #131416; /* Primary button and highlight color */
+  --secondary-color: #3a5bef; /* Secondary button color */
+  --dark-color: #222; /* Dark text color */
+  --gray-color: #666; /* Light gray text */
+  --light-gray: rgba(0, 0, 0, 0.1); /* Hover background */
+  --background-color: #FAF8ED; /* Default background */
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+}
 
 
 .user {
@@ -14,13 +23,10 @@
 }
 
 
-.user-text {
-    max-width: 50%;
-    text-align: right; 
-}
+
 .user-text h2{
     color: maroon;
-    background: ;
+    
 }
 .user-text h1 {
     font-size: 48px;
@@ -47,4 +53,12 @@
     max-width: 100%;
     height: auto;
     object-fit: contain;
+}
+.loginForm{
+    background-color: var(--light-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    height: 75vh;
 }

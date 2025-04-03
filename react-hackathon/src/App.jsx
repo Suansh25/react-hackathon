@@ -7,6 +7,9 @@ import Badges from './components/Badges/Badges.jsx'
 import Badgedetails from './components/SecondPage/Badgesdetails.jsx'
 import User from './components/User/User.jsx'
 import Footer from './components/Footer/Footer.jsx'
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import Planner from './components/Planner/Planner.jsx'
 
 function App() {
   let arr = [
@@ -84,6 +87,9 @@ function App() {
       }
       </div>
       <hr />
+      <Planner></Planner>
+      <hr />
+      
    <Footer></Footer>
     </>
   )
