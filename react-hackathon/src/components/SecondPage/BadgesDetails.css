@@ -18,3 +18,113 @@
     background-color: var(--primary-color);
     color: white;
   }
+/* Flex container for challenges and badges */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Each section takes equal width */
+.challenges, .badges {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Badge Grid */
+.badges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Badge Item */
+.badge-item img {
+    width: 60px;
+    height: 60px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .challenges, .badges {
+        width: 100%;
+    }
+}
+/* Flex container for challenges and badges */
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Each section takes equal width */
+.challenges, .badges {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Challenge Items */
+.challenge-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.challenge-item.completed {
+    background-color: #e0f7fa;
+}
+
+.challenge-details {
+    margin-left: 10px;
+}
+
+/* Badge Grid */
+.badges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Badge Item */
+.badge-item img {
+    width: 60px;
+    height: 60px;
+    opacity: 0.4;
+    transition: 0.3s;
+}
+
+.badge-item.unlocked img {
+    opacity: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .challenges, .badges {
+        width: 100%;
+    }
+}

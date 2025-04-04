@@ -1,127 +1,153 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
+import { auth, db } from "../../firebaseConfig";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
 import './BadgesDetails.css';
 
 const challengesData = [
-    { id: 1, title: "Historical Explorer", description: "Visit 3 historical places in Hyderabad", points: 100, completed: false },
-    { id: 2, title: "Weekend Adventurer", description: "Visit any 2 tourist spots in a single weekend", points: 75, completed: false },
-    { id: 3, title: "First Step", description: "Visit your first place in Hyderabad", points: 50, completed: true },
-    { id: 4, title: "Modern Explorer", description: "Visit 2 modern attractions in Hyderabad", points: 80, completed: false },
+    { id: 1, title: "Historical Explorer", description: "Visit 3 historical places in Hyderabad", points: 100 },
+    { id: 2, title: "Weekend Adventurer", description: "Visit any 2 tourist spots in a single weekend", points: 75 },
+    { id: 3, title: "First Step", description: "Visit your first place in Hyderabad", points: 50 },
+    { id: 4, title: "Modern Explorer", description: "Visit 2 modern attractions in Hyderabad", points: 80 },
 ];
 
-function Badgesdetails() {
-    const [challenges, setChallenges] = useState(challengesData);
-    const [uploadedFiles, setUploadedFiles] = useState([]);
-    const fileInputRef = useRef(null);
-    const uploadBoxRef = useRef(null);
-    const progressBarRef = useRef(null);
-    const progressTextRef = useRef(null);
+const badgesData = [
+    { id: "bronze", title: "Bronze Explorer", pointsRequired: 100, image: "https://cdn-icons-png.flaticon.com/512/2583/2583139.png" },
+    { id: "silver", title: "Silver Explorer", pointsRequired: 200, image: "https://cdn-icons-png.flaticon.com/512/1826/1826490.png" },
+    { id: "gold", title: "Gold Explorer", pointsRequired: 300, image: "https://cdn-icons-png.flaticon.com/512/1826/1826485.png" },
+    { id: "platinum", title: "Platinum Explorer", pointsRequired: 500, image: "https://cdn-icons-png.flaticon.com/512/1826/1826497.png" },
+];
+
+function BadgesDetails() {
+    const [challenges, setChallenges] = useState([]);
+    const [badges, setBadges] = useState([]);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        console.log("Component Mounted. Challenges Loaded.");
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                setUser(currentUser);
+                await loadUserData(currentUser.uid);
+            } else {
+                setUser(null);
+                setChallenges(challengesData.map(ch => ({ ...ch, completed: false })));
+                setBadges([]);
+            }
+        });
+
+        return () => unsubscribe();
     }, []);
 
-    const handleFiles = (files) => {
-        const newFiles = Array.from(files);
-        setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    const loadUserData = async (userId) => {
+        const userRef = doc(db, "users", userId);
+        const userSnap = await getDoc(userRef);
 
-        // Simulate upload progress
-        let progress = 0;
-        const interval = setInterval(() => {
-            progress += 20;
-            if (progressBarRef.current) {
-                progressBarRef.current.style.width = `${progress}%`;
+        if (userSnap.exists()) {
+            const userData = userSnap.data();
+            const completedChallenges = userData.completedChallenges || [];
+            const userPoints = userData.points || 0;
+
+            setChallenges(challengesData.map(ch => ({
+                ...ch,
+                completed: completedChallenges.includes(ch.id),
+            })));
+
+            setBadges(badgesData.map(badge => ({
+                ...badge,
+                unlocked: userPoints >= badge.pointsRequired
+            })));
+        } else {
+            setChallenges(challengesData.map(ch => ({ ...ch, completed: false })));
+            setBadges(badgesData.map(badge => ({ ...badge, unlocked: false })));
+        }
+    };
+
+    const toggleChallenge = async (challengeId) => {
+        if (!user) {
+            alert("Please log in to complete challenges.");
+            return;
+        }
+
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+            const userData = userSnap.data();
+            let updatedChallenges = userData.completedChallenges || [];
+            let updatedPoints = userData.points || 0;
+
+            const challenge = challenges.find(ch => ch.id === challengeId);
+            if (!challenge) return;
+
+            if (updatedChallenges.includes(challengeId)) {
+                updatedChallenges = updatedChallenges.filter(id => id !== challengeId);
+                updatedPoints -= challenge.points;
+            } else {
+                updatedChallenges.push(challengeId);
+                updatedPoints += challenge.points;
             }
-            if (progressTextRef.current) {
-                progressTextRef.current.innerText = `${progress}%`;
-            }
-            if (progress >= 100) {
-                clearInterval(interval);
-            }
-        }, 500);
+
+            await updateDoc(userRef, {
+                completedChallenges: updatedChallenges,
+                points: updatedPoints,
+            });
+
+            setChallenges(challenges.map(ch =>
+                ch.id === challengeId ? { ...ch, completed: !ch.completed } : ch
+            ));
+
+            setBadges(badgesData.map(badge => ({
+                ...badge,
+                unlocked: updatedPoints >= badge.pointsRequired
+            })));
+        }
     };
 
     return (
-        <>
-            <section id="game" className="section">
-                <center>
+        <section id="game" className="section">
+            <center>
                 <h1 className="section-title">Complete Challenges & Earn Points</h1>
-                </center>
-                <div className="game-container">
-                    <div className="challenges">
-                        <h3>Current Challenges</h3>
-                        <div className="challenges-list">
-                            {challenges.map(challenge => (
-                                <div key={challenge.id} className={`challenge-item ${challenge.completed ? 'completed' : ''}`}>
-                                    <i className={`fas ${challenge.completed ? 'fa-check-circle' : 'fa-flag'}`}></i>
-                                    <div className="challenge-details">
-                                        <h4>{challenge.title}</h4>
-                                        <p>{challenge.description}</p>
-                                        <div className="challenge-points">
-                                            <i className="fas fa-star"></i>
-                                            <span>{challenge.points} points</span>
-                                        </div>
+            </center>
+
+            {/* Flex Container for Challenges & Badges */}
+            <div className="content-wrapper">
+                {/* Challenges Section */}
+                <div className="challenges">
+                    <h3>Current Challenges</h3>
+                    <div className="challenges-list">
+                        {challenges.map(challenge => (
+                            <div key={challenge.id} className={`challenge-item ${challenge.completed ? 'completed' : ''}`}>
+                                <input
+                                    type="checkbox"
+                                    checked={challenge.completed}
+                                    onChange={() => toggleChallenge(challenge.id)}
+                                />
+                                <div className="challenge-details">
+                                    <h4>{challenge.title}</h4>
+                                    <p>{challenge.description}</p>
+                                    <div className="challenge-points">
+                                        <span>{challenge.points} points</span>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-                    <div className="upload-area">
-                        <h3>Upload Your Photos</h3>
-                        <div
-                            className="upload-box"
-                            ref={uploadBoxRef}
-                            onClick={() => fileInputRef.current.click()}
-                            onDragOver={(e) => {
-                                e.preventDefault();
-                                uploadBoxRef.current.style.borderColor = '#4a6bff';
-                                uploadBoxRef.current.style.backgroundColor = 'rgba(74, 107, 255, 0.05)';
-                            }}
-                            onDragLeave={() => {
-                                uploadBoxRef.current.style.borderColor = '#ddd';
-                                uploadBoxRef.current.style.backgroundColor = 'transparent';
-                            }}
-                            onDrop={(e) => {
-                                e.preventDefault();
-                                uploadBoxRef.current.style.borderColor = '#ddd';
-                                uploadBoxRef.current.style.backgroundColor = 'transparent';
-                                handleFiles(e.dataTransfer.files);
-                            }}
-                        >
-                            <i className="fas fa-cloud-upload-alt"></i>
-                            <p>Drag & drop your photos here or click to browse</p>
-                            <input
-                                type="file"
-                                ref={fileInputRef}
-                                accept="image/*"
-                                multiple
-                                hidden
-                                onChange={(e) => handleFiles(e.target.files)}
-                            />
-                        </div>
-                        <div className="progress-container">
-                            <div className="progress-bar" ref={progressBarRef}></div>
-                            <span ref={progressTextRef}>0%</span>
-                        </div>
-                        <button
-                            className="btn primary"
-                            disabled={uploadedFiles.length === 0}
-                            onClick={() => alert("Photos Submitted!")}
-                        >
-                            Submit for Verification
-                        </button>
+                            </div>
+                        ))}
                     </div>
                 </div>
-            </section>
-            <center>
-            <div className="b-heading">
-                <h1>Places (or) Badges</h1>
+
+                {/* Badges Section */}
+                <div className="badges">
+                    <h3>Badges Earned</h3>
+                    <div className="badges-grid">
+                        {badges.map(badge => (
+                            <div key={badge.id} className={`badge-item ${badge.unlocked ? 'unlocked' : 'locked'}`}>
+                                <img src={badge.image} alt={badge.title} />
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
-            <div className="b-para">
-                <p>Here we can add badges earned or the various places visited. Example tags are as follows:</p>
-            </div>
-            </center>
-        </>
+        </section>
     );
 }
 
-export default Badgesdetails;
+export default BadgesDetails;
