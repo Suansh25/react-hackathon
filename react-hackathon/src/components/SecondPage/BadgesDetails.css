@@ -1,67 +1,26 @@
+/* Section Headings */
 .b-heading {
-  
     padding-top: 3rem !important;
     padding-bottom: 2rem !important;
 }
+
 .b-para {
     padding-bottom: 3rem !important;
-   
 }
+
 .section-title {
-    font-size: 30px !important;
-   
+    font-size: 50px !important;
     padding-top: 6vh;
     padding-bottom: 6vh;
-
 }
+
+/* Primary Button */
 .btn.primary {
     background-color: var(--primary-color);
     color: white;
-  }
-/* Flex container for challenges and badges */
-.content-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 20px;
 }
 
-/* Each section takes equal width */
-.challenges, .badges {
-    flex: 1;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Badge Grid */
-.badges-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-}
-
-/* Badge Item */
-.badge-item img {
-    width: 60px;
-    height: 60px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .content-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .challenges, .badges {
-        width: 100%;
-    }
-}
-/* Flex container for challenges and badges */
+/* Layout Wrapper */
 .content-wrapper {
     display: flex;
     justify-content: space-between;
@@ -70,23 +29,43 @@
     padding: 20px;
     max-width: 1200px;
     margin: auto;
+    flex-wrap: wrap;
 }
 
-/* Each section takes equal width */
-.challenges, .badges {
+/* ================= Challenges Section ================= */
+.challenges {
     flex: 1;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
 }
 
-/* Challenge Items */
+.challenges:hover {
+    transform: translateY(-5px);
+}
+
+.challenges h2 {
+    font-size: 26px;
+    color: #37474F;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
 .challenge-item {
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 12px 10px;
     border-bottom: 1px solid #ddd;
+    background: #fafafa;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: background 0.3s ease;
+}
+
+.challenge-item:hover {
+    background: #f1f1f1;
 }
 
 .challenge-item.completed {
@@ -94,37 +73,132 @@
 }
 
 .challenge-details {
-    margin-left: 10px;
+    margin-left: 12px;
+    flex: 1;
+}
+
+.challenge-details h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.challenge-details p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* ================= Badges Section ================= */
+.badges {
+    flex: 1;
+    background: linear-gradient(to bottom right, #fdfbfb, #ebedee);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.badges:hover {
+    transform: translateY(-5px);
+}
+
+.badges h2 {
+    font-size: 28px;
+    color: #37474F;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 /* Badge Grid */
 .badges-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding-top: 10px;
 }
 
 /* Badge Item */
+.badge-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Badge Image */
 .badge-item img {
     width: 60px;
     height: 60px;
-    opacity: 0.4;
-    transition: 0.3s;
+    opacity: 0.3;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 
+/* Unlocked badge */
 .badge-item.unlocked img {
     opacity: 1;
+    transform: scale(1.1);
+    animation: glowBadge 1s ease-in-out forwards;
 }
 
-/* Responsive Design */
+/* Badge glow animation */
+@keyframes glowBadge {
+    0% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: 0 0 15px #FFB74D;
+    }
+}
+
+/* Optional label under badge */
+.badge-item span {
+    position: absolute;
+    bottom: -20px;
+    font-size: 0.75rem;
+    color: #666;
+    width: 100%;
+    text-align: center;
+}
+
+/* ================= Responsive ================= */
 @media (max-width: 768px) {
     .content-wrapper {
         flex-direction: column;
         align-items: center;
     }
 
-    .challenges, .badges {
+    .challenges,
+    .badges {
         width: 100%;
+    }
+
+    .badges-grid {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    }
+
+    .badge-item {
+        width: 70px;
+        height: 70px;
+        padding: 10px;
+    }
+
+    .badge-item img {
+        width: 50px;
+        height: 50px;
     }
 }

@@ -1,0 +1,114 @@
+/* src/components/Leaderboard/Leaderboard.css */
+:root {
+  --primary-color: #131416;
+  --secondary-color: #3a5bef;
+  --accent-color: #e86f47;
+  --dark-color: #222;
+  --gray-color: #666;
+  --light-gray: #f5f5f5;
+  --border-color: #e0e0e0;
+  --background-color: #faf8f3;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.leaderboard {
+    background-color: var(--background-color);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: var(--box-shadow);
+    color: #333;
+  }
+  
+  .leaderboard h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 28px;
+    color: #2c3e50;
+  }
+  
+  .leaderboard ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .leaderboard li {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    align-items: center;
+  }
+/*   
+  .leaderboard li:nth-child(1) {
+    background-color: #fff9e6;
+    font-weight: bold;
+  }
+  
+  .leaderboard li:nth-child(2) {
+    background-color: #f0f7ff;
+    font-weight: bold;
+  }
+  
+  .leaderboard li:nth-child(3) {
+    background-color: #f6f0ff;
+    font-weight: bold;
+  } */
+  
+  .rank {
+    width: 30px;
+    display: inline-block;
+  }
+  
+  .name {
+    flex: 1;
+  }
+  
+  .points {
+  
+    font-weight: 500;
+  }
+  
+  .badge {
+   
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+  .leaderboard {
+  padding: 2rem;
+  background: var(--background-color);
+  max-width: 600px;
+  margin: auto;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.leaderboard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.leaderboard li {
+  background: white;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+
+.badge {
+  font-weight: bold;
+  color: #555;
+}

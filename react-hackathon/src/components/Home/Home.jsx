@@ -1,10 +1,18 @@
 import './Home.css';
+import HydImage from '../../../public/HomeImages/Hyd.jpg'; 
 
 function Home() {
     return (
         <div className="container">
             <section id="home" className="section active">
-                <div className="hero">
+                <div
+                    className="hero"
+                    style={{
+                        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${HydImage})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                    }}
+                >
                     <h1>Discover Hyderabad Like Never Before</h1>
                     <p>Turn your city exploration into an exciting game with rewards and challenges!</p>
                     <div className="cta-buttons">
@@ -30,7 +38,7 @@ function Home() {
                     </div>
                 </div>
             </section>
-        </div>  
+        </div>
     );
 }
 

@@ -30,9 +30,8 @@ body {
 }
 
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-              url('react-hackathon/public/HomeImages/Hyd.jpg') no-repeat center center;
-  background-size: cover;
+  /* remove the background-image line */
+  /* keep layout and text styling only */
   width: 100vw;
   max-width: 100%;
   height: 60vh;
@@ -43,9 +42,8 @@ body {
   text-align: center;
   color: white;
   border-radius: 8px;
-
- 
 }
+
 
 .hero h1 {
   color: white;

@@ -1,13 +1,14 @@
 :root {
-    --primary-color: #131416; /* Primary button and highlight color */
-  --secondary-color: #3a5bef; /* Secondary button color */
-  --dark-color: #222; /* Dark text color */
-  --gray-color: #666; /* Light gray text */
-  --light-gray: rgba(0, 0, 0, 0.1); /* Hover background */
-  --background-color: #FAF8ED; /* Default background */
-  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --light-color:white;
+    --primary-color: #131416;
+    --secondary-color: #3a5bef;
+    --dark-color: #222;
+    --gray-color: #666;
+    --light-gray: rgba(0, 0, 0, 0.1);
+    --background-color: #FAF8ED;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --light-color: white;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -16,7 +17,7 @@
 
 body {
     width: 100%;
-    overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+    overflow-x: hidden;
     background-color: var(--background-color);
 }
 
@@ -32,26 +33,79 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 1rem 2rem;
     background-color: var(--background-color);
     box-shadow: var(--box-shadow);
     z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* ✅ Align vertically */
+    flex-wrap: wrap;
 }
 
-.logo {
+.nav {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* ✅ Centers nav links */
+}
+
+.nav ul {
+    display: flex;
+    gap: 1rem; /* ✅ Better spacing than margin */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav a {
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--dark-color);
     display: flex;
     align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav a:hover,
+.nav a.active {
+    background-color: var(--light-gray);
+    color: var(--primary-color);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ✅ Remove yellow underline or unwanted border */
+.nav a:focus {
+    outline: none;
+    border-bottom: none;
+}
+
+
+.logo {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
 }
 
-.logo i {
-    margin-right: 0.5rem;
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
     font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
 }
 
 .nav ul {
@@ -67,17 +121,13 @@ body {
 
 .nav a {
     text-decoration: none;
-    color: var(--dark-gray);
+    color: var(--dark-color);
     font-weight: 500;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-}
-
-.nav a i {
-    margin-right: 0.5rem;
 }
 
 .nav a:hover {
@@ -94,21 +144,122 @@ body {
 .user-profile {
     display: flex;
     align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
 }
 
-.user-profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 0.5rem;
-    object-fit: cover;
-}
-
-#user-points {
+#user-info {
     font-weight: 600;
+    
     color: var(--primary-color);
     background-color: var(--light-gray);
     padding: 0.3rem 0.8rem;
     border-radius: 20px;
     font-size: 0.9rem;
+}
+
+.logout-btn {
+    background-color: var(--secondary-color);
+    color: var(--light-color);
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--primary-color);
+}
+
+.animate-pop {
+    animation: pop 0.4s ease-in-out;
+}
+
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* ✅ Responsive styles */
+@media (max-width: 768px) {
+    .header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.2rem;
+      gap: 1rem;
+    }
+  
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      flex: 1;
+    }
+  
+    .menu-toggle {
+      display: block;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--primary-color);
+      margin-left: auto;
+    }
+  
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0;
+    }
+  
+    .nav {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      margin-top: 1rem;
+    }
+  
+    .nav.open {
+      display: flex;
+      animation: slideDown 0.3s ease-in-out;
+    }
+  
+    .nav ul {
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .nav li {
+      width: 100%;
+    }
+  
+    .nav a {
+      width: 100%;
+      padding: 1rem;
+      border-bottom: 1px solid var(--light-gray);
+    }
+  
+    .nav a:focus {
+      outline: none;
+      border: none;
+      box-shadow: none;
+    }
+  }
+  
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

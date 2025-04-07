@@ -1,43 +1,51 @@
 import { useEffect, useState } from "react";
 import { auth, db } from "../../firebaseConfig";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import "./Nav.css";
 
 function Nav() {
     const [user, setUser] = useState(null);
-    const [username, setUsername] = useState(""); // 🔹 Store username separately
+    const [username, setUsername] = useState("");
     const [points, setPoints] = useState(0);
+    const [animate, setAnimate] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+        let unsubscribeUserSnapshot = null;
+
+        const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
                 setUser(currentUser);
-                await fetchUserDetails(currentUser.uid); // 🔹 Fetch details
+
+                const userRef = doc(db, "users", currentUser.uid);
+                unsubscribeUserSnapshot = onSnapshot(userRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        setUsername(userData.name || "User");
+
+                        setPoints((prevPoints) => {
+                            if (prevPoints !== userData.points) {
+                                setAnimate(true);
+                                setTimeout(() => setAnimate(false), 400);
+                            }
+                            return userData.points || 0;
+                        });
+                    }
+                });
             } else {
                 setUser(null);
                 setUsername("");
                 setPoints(0);
+                if (unsubscribeUserSnapshot) unsubscribeUserSnapshot();
             }
         });
 
-        return () => unsubscribe();
+        return () => {
+            unsubscribeAuth();
+            if (unsubscribeUserSnapshot) unsubscribeUserSnapshot();
+        };
     }, []);
-
-    const fetchUserDetails = async (userId) => {
-        try {
-            const userRef = doc(db, "users", userId);
-            const userSnap = await getDoc(userRef);
-
-            if (userSnap.exists()) {
-                const userData = userSnap.data();
-                setUsername(userData.name || "User"); // 🔹 Get name from Firestore
-                setPoints(userData.points || 0);
-            }
-        } catch (error) {
-            console.error("Error fetching user details:", error);
-        }
-    };
 
     const handleLogout = async () => {
         await signOut(auth);
@@ -46,31 +54,45 @@ function Nav() {
         setPoints(0);
     };
 
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
+
     return (
-        <div className="Container">
+        <div className="container">
             <header className="header">
-                <div className="logo">
-                    <span>🗺️ Hyderabad Explorer</span>
+                <div className="header-top">
+                    <div className="logo">
+                        <span>🗺️ Hyderabad Explorer</span>
+                    </div>
+                   
                 </div>
-                <nav className="nav">
+                <button className="menu-toggle" onClick={toggleMenu}>☰</button>
+                <nav className={`nav ${menuOpen ? "open" : ""}`}>
                     <ul>
                         <li><a href="#home" className="nav-link active">🏠 Home</a></li>
                         <li><a href="#places" className="nav-link">🏛️ Places</a></li>
                         <li><a href="#game" className="nav-link">🎮 Game</a></li>
                         <li><a href="#planner" className="nav-link">💰 Budget Planner</a></li>
                         <li><a href="#leaderboard" className="nav-link">🏆 Leaderboard</a></li>
-                    </ul>
-                </nav>
-                <div className="user-profile">
+                        <li><div className="user-profile">
                     {user ? (
                         <>
-                            <span id="user-info">😄 {username} - {points} pts</span>
+                            <span
+                                id="user-info"
+                                className={animate ? "animate-pop" : ""}
+                            >
+                                😄 {username} - {points} pts
+                            </span>
                             <button className="logout-btn" onClick={handleLogout}>🚪 Logout</button>
                         </>
                     ) : (
                         <a href="#login" id="user-info">🔑 Login</a>
                     )}
-                </div>
+                </div></li>
+                    </ul>
+                </nav>
+                
             </header>
         </div>
     );

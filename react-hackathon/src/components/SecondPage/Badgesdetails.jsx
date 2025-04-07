@@ -1,7 +1,9 @@
+// src/components/BadgesDetails.jsx
 import { useEffect, useState } from "react";
 import { auth, db } from "../../firebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import Badges from "../Badges/Badges.jsx"; // Import the reusable component
 import './BadgesDetails.css';
 
 const challengesData = [
@@ -109,9 +111,8 @@ function BadgesDetails() {
                 <h1 className="section-title">Complete Challenges & Earn Points</h1>
             </center>
 
-            {/* Flex Container for Challenges & Badges */}
             <div className="content-wrapper">
-                {/* Challenges Section */}
+                {/* Challenges */}
                 <div className="challenges">
                     <h3>Current Challenges</h3>
                     <div className="challenges-list">
@@ -134,17 +135,6 @@ function BadgesDetails() {
                     </div>
                 </div>
 
-                {/* Badges Section */}
-                <div className="badges">
-                    <h3>Badges Earned</h3>
-                    <div className="badges-grid">
-                        {badges.map(badge => (
-                            <div key={badge.id} className={`badge-item ${badge.unlocked ? 'unlocked' : 'locked'}`}>
-                                <img src={badge.image} alt={badge.title} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
             </div>
         </section>
     );

@@ -4,12 +4,13 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from
 
 // 🔥 Replace with your Firebase credentials
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING,
-    appId: import.meta.env.VITE_FIREBASE_APPID
+    apiKey: "AIzaSyCOI1O_-J4jn20ZAlaWb2K_sNV2krUouFM",
+  authDomain: "tour-planner-155a8.firebaseapp.com",
+  projectId: "tour-planner-155a8",
+  storageBucket: "tour-planner-155a8.firebasestorage.app",
+  messagingSenderId: "84452382686",
+  appId: "1:84452382686:web:bedf2590d962afd2daaf4f"
+
 };
 
 // 🔹 Initialize Firebase
